@@ -34,6 +34,7 @@ namespace th {
             static th::AssetPool::Asset* getAsset(std::string imagePath);
             static void deleteAsset(std::string assetName);
             static void deleteAssets();
+            static int size();
 
         private:
 

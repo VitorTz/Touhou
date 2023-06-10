@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../include/scene/scene.hpp"
+#include "scene/scene.hpp"
+#include "util/constants.hpp"
 
 
 namespace th {
@@ -14,13 +15,12 @@ namespace th {
             sf::RenderWindow* window;
             sf::Clock clock;
             th::Scene* currentScene;
-            void init();
             double getDeltaTime();
+            void run();
         public:
             Window();
-            void changeCurrentScene(int sceneId);
+            void changeCurrentScene(th::SceneId sceneId);
             void close();
-            void run();
     };
 
 } // namespace th

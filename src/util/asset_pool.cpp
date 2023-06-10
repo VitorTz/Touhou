@@ -20,9 +20,17 @@ void th::AssetPool::deleteAssets() {
 }
 
 void th::AssetPool::deleteAsset(std::string assetName) {
-    th::AssetPool::Asset* a = th::AssetPool::assets.at(assetName);
-    th::AssetPool::assets.erase(assetName);
-    delete a;
+    auto it = th::AssetPool::assets.find(assetName);
+    if (it != th::AssetPool::assets.end()) {
+        auto asset = th::AssetPool::assets.at(assetName);
+        std::cout << "Deletando " << assetName << '\n';
+        th::AssetPool::assets.erase(it);
+        delete asset;
+    }
+}
+
+int th::AssetPool::size() {
+    return th::AssetPool::assets.size();
 }
 
 

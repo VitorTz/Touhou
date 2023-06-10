@@ -3,7 +3,6 @@
 #include <iostream>
 
 
-
 th::MenuScene::MenuScene(th::Window* touhouWindow) : Scene(touhouWindow, "MenuScene") {
     this->menu.setPos(sf::Vector2f(610, 300));
     this->menu.setSpacing(sf::Vector2f(0, 28));
@@ -12,17 +11,18 @@ th::MenuScene::MenuScene(th::Window* touhouWindow) : Scene(touhouWindow, "MenuSc
     this->menu.addButton(new th::Button(th::ButtonType::MenuButtonMusicRoom));
     this->menu.addButton(new th::Button(th::ButtonType::MenuButtonConfig));
     this->menu.addButton(new th::Button(th::ButtonType::MenuButtonExit));
-    this->addImage("assets/menu/bg.png", sf::Vector2f(0, 0));
+    this->addImage(th::MENU_BG_IMG, sf::Vector2f(0, 0));
 }
+
 
 th::MenuScene::~MenuScene() {
-    for (th::AssetPool::Asset* a : this->images) {
-        th::AssetPool::deleteAsset(a->getKey());
-    }
+    for (auto& imageName : this->menuImages)
+        th::AssetPool::deleteAsset(imageName);
 }
 
+
 void th::MenuScene::startGame() {
-    this->touhouWindow->changeCurrentScene(1);
+    this->touhouWindow->changeCurrentScene(th::SceneId::LevelScene);
 }
 
 
@@ -30,9 +30,11 @@ void th::MenuScene::startConfig() {
     std::cout << "Config\n";
 }
 
+
 void th::MenuScene::startMusicRoom() {
     std::cout << "Music\n";
 }
+
 
 void th::MenuScene::exitGame() {
     this->touhouWindow->close();
@@ -40,9 +42,10 @@ void th::MenuScene::exitGame() {
 
 
 void th::MenuScene::drawImages(sf::RenderWindow* window) {
-    for (auto& image : this->images)
-        image->draw(window);
+    for (auto& imageName : this->menuImages)
+        th::AssetPool::getAsset(imageName)->draw(window);
 }
+
 
 void th::MenuScene::runMenu() {
     this->menu.run();
@@ -82,5 +85,5 @@ void th::MenuScene::draw(sf::RenderWindow* window) {
 void th::MenuScene::addImage(std::string imagePath, sf::Vector2f position) {
     auto* asset = th::AssetPool::getAsset(imagePath);
     asset->getSprite()->setPosition(position);
-    this->images.push_back(asset);
+    this->menuImages.push_back(asset->getKey());
 }

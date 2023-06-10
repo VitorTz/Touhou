@@ -6,6 +6,14 @@ th::Button::Button(th::ButtonType buttonType) {
     this->buttonType = buttonType;
 }
 
+th::Button::~Button() {
+    std::pair<std::string, std::string> images = th::buttonInfoByNumber[ (int) this->buttonType];
+    std::filesystem::path k1(images.first);
+    std::filesystem::path k2(images.second);
+    th::AssetPool::deleteAsset(k1.string());
+    th::AssetPool::deleteAsset(k2.string());
+}
+
 
 th::AssetPool::Asset* th::Button::getButtonAsset() {
     std::pair<std::string, std::string> images = th::buttonInfoByNumber[ (int) this->buttonType];

@@ -8,14 +8,6 @@
 
 namespace th {
 
-    enum class ButtonType {
-        MenuButtonStart = 0,
-        MenuButtonMusicRoom = 1,
-        MenuButtonConfig = 2,
-        MenuButtonExit = 3
-    };
-
-
     class Button {
         
         private:
@@ -25,6 +17,7 @@ namespace th {
             bool isActive;
         public:
             Button(th::ButtonType buttonType);
+            ~Button();
             void draw(sf::RenderWindow* window);
             void activate();
             void deactivate();

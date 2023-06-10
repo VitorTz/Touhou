@@ -12,7 +12,7 @@ namespace th {
     class MenuScene : public Scene {
 
         private:
-            std::vector<th::AssetPool::Asset*> images;
+            std::vector<std::string> menuImages;
             th::Menu menu;
             void drawImages(sf::RenderWindow* window);
             void startGame();

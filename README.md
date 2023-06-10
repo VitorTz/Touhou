@@ -4,4 +4,4 @@
 > make
 
 ## Executar
-> ./touhou
+> ./bin/touhou
