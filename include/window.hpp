@@ -5,6 +5,8 @@
 
 namespace th {
 
+    class Scene;
+
     class Window {
 
         private:
@@ -13,11 +15,11 @@ namespace th {
             sf::Clock clock;
             th::Scene* currentScene;
             void init();
-            void changeCurrentScene(int sceneId);
             double getDeltaTime();
         public:
-
             Window();
+            void changeCurrentScene(int sceneId);
+            void close();
             void run();
     };
 

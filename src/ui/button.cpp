@@ -2,8 +2,10 @@
 
 
 th::Button::Button(th::ButtonType buttonType) {
+    this->isActive = false;
     this->buttonType = buttonType;
 }
+
 
 th::AssetPool::Asset* th::Button::getButtonAsset() {
     std::pair<std::string, std::string> images = th::buttonInfoByNumber[ (int) this->buttonType];
@@ -28,6 +30,11 @@ int th::Button::height() {
 void th::Button::setPos(sf::Vector2f pos) {
     this->pos = pos;
 }
+
+th::ButtonType th::Button::getButtonType() {
+    return this->buttonType;
+}
+
 
 void th::Button::activate() {
     this->isActive = true;

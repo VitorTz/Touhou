@@ -1,6 +1,7 @@
 #include "../include/window.hpp"
 #include "../include/util/constants.hpp"
 #include "../include/scene/menu_scene.hpp"
+#include "../include/scene/level_scene.hpp"
 #include <iostream>
 
 
@@ -23,6 +24,7 @@ th::Window::Window() {
     this->window->setPosition(
         sf::Vector2i(monitor.width / 2 - th::SCREEN_WIDTH / 2, monitor.height / 2 - th::SCREEN_HEIGHT / 2)
     );
+    this->currentScene = nullptr;
     this->init();
 }
 
@@ -32,9 +34,19 @@ double th::Window::getDeltaTime() {
 }
 
 void th::Window::changeCurrentScene(int sceneId) {
+    Scene* oldScene = this->currentScene;
     if (sceneId == 0) {
-        this->currentScene = new th::MenuScene();
+        this->currentScene = new th::MenuScene(this);
+    } else if (sceneId == 1) {
+        this->currentScene = new th::LevelScene(this);
     }
+    if (oldScene != nullptr) {
+        delete oldScene;
+    }
+}
+
+void th::Window::close() {
+    this->window->close();
 }
 
 

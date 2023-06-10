@@ -9,26 +9,29 @@
 namespace th {
 
     enum class ButtonType {
-        MenuButton = 0
+        MenuButtonStart = 0,
+        MenuButtonMusicRoom = 1,
+        MenuButtonConfig = 2,
+        MenuButtonExit = 3
     };
 
 
     class Button {
         
         private:
+            th::AssetPool::Asset* getButtonAsset();
             th::ButtonType buttonType;
             sf::Vector2f pos;
             bool isActive;
-            th::AssetPool::Asset* getButtonAsset();
         public:
             Button(th::ButtonType buttonType);
-            void setPos(sf::Vector2f pos);
-            int width();
-            int height();
             void draw(sf::RenderWindow* window);
             void activate();
             void deactivate();
-
+            int width();
+            int height();
+            void setPos(sf::Vector2f pos);
+            th::ButtonType getButtonType();
     };
 
 

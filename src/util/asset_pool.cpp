@@ -19,6 +19,12 @@ void th::AssetPool::deleteAssets() {
     }
 }
 
+void th::AssetPool::deleteAsset(std::string assetName) {
+    th::AssetPool::Asset* a = th::AssetPool::assets.at(assetName);
+    th::AssetPool::assets.erase(assetName);
+    delete a;
+}
+
 
 th::AssetPool::Asset::Asset(std::string name, std::string key, std::filesystem::path imagePath) {
     this->name = name;

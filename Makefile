@@ -1,10 +1,10 @@
 CC := g++
-CFLAGS := -Wall -Wextra -std=c++17
+CFLAGS := -Wall -Wextra -std=c++17 -pedantic
 LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system
 
 SRCDIR := src
 BUILDDIR := build
-TARGET := touhou_project
+TARGET := touhou
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))

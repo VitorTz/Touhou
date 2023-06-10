@@ -12,12 +12,18 @@ namespace th {
     class MenuScene : public Scene {
 
         private:
-            
             std::vector<th::AssetPool::Asset*> images;
             th::Menu menu;
+            void drawImages(sf::RenderWindow* window);
+            void startGame();
+            void startConfig();
+            void startMusicRoom();
+            void exitGame();
+            void runMenu();
             
         public:
-            MenuScene();
+            MenuScene(th::Window* touhouWindow);
+            ~MenuScene() override;
             void update(double deltaTime) override;
             void draw(sf::RenderWindow* window) override;
             void addImage(std::string imagePath, sf::Vector2f position);

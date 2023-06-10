@@ -4,26 +4,80 @@
 
 
 
-th::MenuScene::MenuScene() : Scene("MenuScene") {
+th::MenuScene::MenuScene(th::Window* touhouWindow) : Scene(touhouWindow, "MenuScene") {
     this->menu.setPos(sf::Vector2f(610, 300));
     this->menu.setSpacing(sf::Vector2f(0, 28));
-    this->menu.addButton(new th::Button(th::ButtonType::MenuButton));
-    this->menu.addButton(new th::Button(th::ButtonType::MenuButton));
-    this->menu.addButton(new th::Button(th::ButtonType::MenuButton));
-    this->menu.addButton(new th::Button(th::ButtonType::MenuButton));
+    this->menu.setAlignment(th::Alignment::Vertical);
+    this->menu.addButton(new th::Button(th::ButtonType::MenuButtonStart));
+    this->menu.addButton(new th::Button(th::ButtonType::MenuButtonMusicRoom));
+    this->menu.addButton(new th::Button(th::ButtonType::MenuButtonConfig));
+    this->menu.addButton(new th::Button(th::ButtonType::MenuButtonExit));
     this->addImage("assets/menu/bg.png", sf::Vector2f(0, 0));
 }
 
-void th::MenuScene::update(double deltaTime) {
-    this->menu.run();
+th::MenuScene::~MenuScene() {
+    for (th::AssetPool::Asset* a : this->images) {
+        th::AssetPool::deleteAsset(a->getKey());
+    }
 }
 
-void th::MenuScene::draw(sf::RenderWindow* window) {
-    for (auto& image : this->images) {
+void th::MenuScene::startGame() {
+    this->touhouWindow->changeCurrentScene(1);
+}
+
+
+void th::MenuScene::startConfig() {
+    std::cout << "Config\n";
+}
+
+void th::MenuScene::startMusicRoom() {
+    std::cout << "Music\n";
+}
+
+void th::MenuScene::exitGame() {
+    this->touhouWindow->close();
+}
+
+
+void th::MenuScene::drawImages(sf::RenderWindow* window) {
+    for (auto& image : this->images)
         image->draw(window);
+}
+
+void th::MenuScene::runMenu() {
+    this->menu.run();
+    th::Button* clickedButton = this->menu.getClickedButton();
+    if (clickedButton != nullptr) {
+        switch (clickedButton->getButtonType()) {
+            case th::ButtonType::MenuButtonStart:
+                this->startGame();
+                break;
+            case th::ButtonType::MenuButtonMusicRoom:
+                this->startMusicRoom();
+                break;
+            case th::ButtonType::MenuButtonConfig:
+                this->startConfig();
+                break;
+            case th::ButtonType::MenuButtonExit:
+                this->exitGame();
+                break;
+            default:
+                break;
+        }
     }
+}
+
+
+void th::MenuScene::update(double deltaTime) {
+    this->runMenu();
+}
+
+
+void th::MenuScene::draw(sf::RenderWindow* window) {
+    this->drawImages(window);
     this->menu.draw(window);
 }
+
 
 void th::MenuScene::addImage(std::string imagePath, sf::Vector2f position) {
     auto* asset = th::AssetPool::getAsset(imagePath);
