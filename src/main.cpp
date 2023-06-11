@@ -1,7 +1,7 @@
-#include "../include/window.hpp"
+#include "../include/touhou.hpp"
 
 
 int main() {
-    th::Window w;
+    th::TouhouWindow window;
     return 0;
 }

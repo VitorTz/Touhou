@@ -1,26 +1,20 @@
-#pragma once
-#include <SFML/Graphics.hpp>
-#include "scene/scene.hpp"
-#include "util/constants.hpp"
+#include "touhou.hpp"
+
 
 
 namespace th {
 
-    class Scene;
-
-    class Window {
+    class TouhouWindow {
 
         private:
-            
             sf::RenderWindow* window;
             sf::Clock clock;
-            th::Scene* currentScene;
-            double getDeltaTime();
-            void run();
+            void mainloop();
+
         public:
-            Window();
-            void changeCurrentScene(th::SceneId sceneId);
+            TouhouWindow();
             void close();
+
     };
 
-} // namespace th
+} //namespace th

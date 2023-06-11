@@ -1,34 +1,35 @@
-#pragma once
+#ifndef TOUHOU_CONSTANTS_HPP
+#define TOUHOU_CONSTANTS_HPP
 #include <string>
+#include <unordered_map>
 
 
 namespace th {
 
+    // Window
     const int SCREEN_WIDTH = 1000;
     const int SCREEN_HEIGHT = 700;
     const std::string SCREEN_TITLE = "Touhou";
     const int FPS = 120;
-    const std::string WINDOW_ICON_FILE = "assets/icons/reimu-icon.png";
     
-    const std::pair<std::string, std::string> buttonInfoByNumber[] = {
-        {"assets/menu/startBtnActive.png", "assets/menu/startBtnInactive.png"},
-        {"assets/menu/musicBtnActive.png", "assets/menu/musicBtnInactive.png"},
-        {"assets/menu/configBtnActive.png", "assets/menu/configBtnInactive.png"},
-        {"assets/menu/exitBtnActive.png", "assets/menu/exitBtnInactive.png"}
+
+    // Images
+
+    enum class ImageId {
+
+        // Icons
+        REIMU_ICON,
+        // Menu
+        MENU_BG
+
     };
 
-    enum class SceneId{
-        MenuScene,
-        LevelScene
+    const std::unordered_map<th::ImageId, std::string> imagePathById = {
+        {th::ImageId::REIMU_ICON, "assets/icons/reimu-icon.png"},
+        {th::ImageId::MENU_BG, "assets/menu/bg.png"}
     };
 
-    enum class ButtonType {
-        MenuButtonStart = 0,
-        MenuButtonMusicRoom = 1,
-        MenuButtonConfig = 2,
-        MenuButtonExit = 3
-    };
+}
 
-    const std::string MENU_BG_IMG = "assets/menu/bg.png";
-    
-} // namespace th
+
+#endif // TOUHOU_CONSTANTS_HPP

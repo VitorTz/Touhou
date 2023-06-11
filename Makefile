@@ -23,7 +23,7 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 clean:
 	@echo "Cleaning..."
 	@rm -rf $(BUILDDIR) $(TARGET)
-	@echo "Clean complete!"
 	@mkdir build build/ecs build/math build/scene build/util build/ui
+	@echo "Clean complete!"
 
 .PHONY: clean
